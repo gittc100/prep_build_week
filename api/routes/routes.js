@@ -1,4 +1,4 @@
-// const axios = require("axios");
+
 const bcrypt = require("bcryptjs");
 const {
   authenticate,
@@ -30,12 +30,14 @@ module.exports = server => {
     "/api/users/:userID/entries/:entryID",
     authenticate,
     checkUser,
+    checkEntry,
     getEntryPerUser
   );
   server.delete(
     "/api/users/:userID/entries/:entryID",
     authenticate,
     checkUser,
+    checkEntry,
     deleteEntryPerUser
   );
   server.put(

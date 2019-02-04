@@ -63,20 +63,19 @@ function checkEntry(req, res, next) {
   console.log(req.decoded);
   const { id } = req.decoded;
   let { entryID } = req.params;
-
+  entryID = Number(entryID);
+  console.log({ entry: entryID }, { id: id });
   db("entries")
-    .where({ user_id: id })
-    .then(entries => {console.log(entries)})
+    .where({ user_id: id, id: entryID })
+    .then(entry => {
+      console.log("entry", entry);
+      if (entry.length > 0) {
+        next();
+      } else {
+        res.status(404).json("Entry Does Not Exist");
+      }
+    })
     .catch(err => {
       res.status(400).json("didn;t't");
     });
-
-  userID = Number(userID);
-  if (id === userID) {
-    next();
-  } else {
-    res
-      .status(401)
-      .json({ message: "Access Denied User Not Logged In/Incorrect User" });
-  }
 }

@@ -1,17 +1,11 @@
 const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-
 const configureRoutes = require('./routes/routes.js');
-
+const configureMiddleware = require('./middleware/middleware.js');
 const server = express();
 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
-
+configureMiddleware(server);
 configureRoutes(server);
 
 module.exports = {
-  server,
+  server
 };
