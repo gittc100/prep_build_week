@@ -1,4 +1,4 @@
-
+require('dotenv').config(); 
 const bcrypt = require("bcryptjs");
 const {
   authenticate,
@@ -72,7 +72,7 @@ const serverErrorGetId = res => err => {
 };
 
 function test(req, res) {
-  res.status(200).json("Sanity Check Server is Connected: 5000");
+  res.status(200).json(`Sanity Check Server is Connected: ${process.env.PORT}`);
 }
 
 function register(req, res) {
